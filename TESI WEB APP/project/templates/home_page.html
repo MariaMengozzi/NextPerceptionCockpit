@@ -1,0 +1,66 @@
+{%for key, value in data['activities'].items() %}
+<div class='row my-5'>
+    <div class="col-1 col-md-2"></div>
+
+    <form action="/single_activity" method="POST" class='col-10 col-md-8 '>
+      <input type="hidden" id="idActivity" name="idActivity" value="{{key}}"/>
+      <div class="card border-dark shadow p-0">
+        <div class="card-body text-dark py-1">
+          <div class="row border-bottom border-dark  pb-2">
+              <div class="col-3 ">
+                <!-- <img src="{{url_for('static',filename='image/'+ value['img'])}}" alt="" class = 'activity_profile_icon'> --> 
+                <img src= "{{ value['img'] }}" alt="" class = 'activity_profile_icon'>
+              </div>
+              <div class="col-md-5 col-9 my-auto text-center fw-bold">
+                  {{value['nick']}}
+              </div>
+              <div class="col-12 col-md-4 data my-auto text-end">
+                {{value['data']}}
+            </div>
+          </div>
+
+          <div class="row border-bottom border-dark px-0 py-2">
+            <div class="col-12 col-md-3 my-auto fw-bold">
+              FTD score
+            </div>
+            <div class="col-md-5 col-6 my-auto text-center">
+                {{value['ftd_score']}}
+            </div>
+            <div class="col-md-4 col-6 data my-auto text-end">
+              {%for res in value['ftd_res'] %}
+                <img src="{{url_for('static',filename='image/results/'+ res)}}" alt="" class = 'activity_results_icon'>
+              {% endfor %}
+          </div>
+        </div>
+
+        <div class="row border-bottom border-dark px-0 py-2">
+            <div class="col-12 col-md-3 my-auto fw-bold">
+              ECO score
+            </div>
+            <div class="col-md-5 col-6 my-auto text-center">
+                {{value['eco_score']}}
+            </div>
+            <div class="col-md-4 col-6 data my-auto text-end">
+              {%for res in value['eco_res'] %}
+                <img src="{{url_for('static',filename='image/results/'+ res)}}" alt="" class = 'activity_results_icon'>
+              {% endfor %}
+            </div>
+        </div>
+
+        <div class="row px-0">
+            <div class="col-6 my-auto">
+              Likes
+            </div>
+            <div class="col-6 nickname text-end">
+                {{value['like']}}
+            </div>
+            
+        </div>
+      </div>
+      </div>
+    </form>
+    
+
+    <div class="col-1 col-md-2"></div>
+</div>
+{% endfor %}

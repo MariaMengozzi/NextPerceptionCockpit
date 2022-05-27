@@ -1,0 +1,140 @@
+<div class="row my-5">
+    <div class="col-1 col-md-2"></div>
+
+
+    <div class="card border-dark shadow col-10 col-md-8 ">
+        <div class="card-body text-dark py-auto">
+            <div class="row text-center pb-5">
+                <div class="col-12">
+                    Global ranking
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-4 p-0">
+                    {%if data['global_ranking'][1][0] != '-'%}
+                    <form action="/profile" method="post">
+                        <input type="hidden" name="nick" value="{{data['global_ranking'][1][1]}}">
+                        {%endif%}
+                        <button type="button" class="btn position-relative p-0">
+                            <img src="{{data['global_ranking'][1][0]}}" alt=""
+                                class='second_classified'>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light ">
+                                <img src="{{url_for('static',filename='image/results/trophy_second.png')}}" alt=""
+                                    class='ranking_icon'>
+                                <span class="visually-hidden">second classified</span>
+                            </span>
+                            <!-- <div>
+                                {{data['global_ranking'][1][1]}}
+                            </div> -->
+                        </button>
+                        {%if data['global_ranking'][2][1] != '-'%}
+                    </form>
+                    {%endif%}
+                </div>
+                <div class="col-4 p-0">
+                    {%if data['global_ranking'][0][1] != '-'%}
+                    <form action="/profile" method="post">
+                        <input type="hidden" name="nick" value="{{data['global_ranking'][0][1]}}">
+                    {%endif%}
+                        <button type="button" class="btn position-relative p-0">
+                            <img src="{{data['global_ranking'][0][0]}}" alt=""
+                                class='first_classified'>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light ">
+                                <img src="{{url_for('static',filename='image/results/crown.png')}}" alt=""
+                                    class='ranking_icon'>
+                                <span class="visually-hidden">first classified</span>
+                            </span>
+                            <!-- <div>
+                                {{data['global_ranking'][0][1]}}
+                            </div> -->
+                        </button>
+                        {%if data['global_ranking'][0][1] != '-'%}
+                    </form>
+                    {%endif%}
+
+                </div>
+                <div class="col-4 p-0">
+                    {%if data['global_ranking'][2][1] != '-'%}
+                    <form action="/profile" method="post">
+                        <input type="hidden" name="nick" value="{{data['global_ranking'][2][1]}}">
+                        {%endif%}
+                        <button type="button" class="btn position-relative p-0">
+                            <img src="{{data['global_ranking'][2][0]}}" alt=""
+                                class='third_classified'>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light ">
+                                <img src="{{url_for('static',filename='image/results/trophy_third.png')}}" alt=""
+                                    class='ranking_icon'>
+                                <span class="visually-hidden">third classified</span>
+                            </span>
+                            <!-- <div>
+                                {{data['global_ranking'][2][1]}}
+                            </div> -->
+                        </button>
+                        {%if data['global_ranking'][2][1] != '-'%}
+                    </form>
+                    {%endif%}
+                </div>
+            </div>
+            <div class="row pt-2">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Person</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for p in data['global_ranking'] %}
+                            {%if (loop.index > 3) and (loop.index <= 10) %} 
+                                <tr>
+                                    <th scope="row">{{loop.index}}</th>
+                                    <td>
+                                        {%if p[1] != '-'%}
+                                        <form action="/profile" method="post">
+                                            <input type="hidden" name="nick" value='{{p[1]}}'>
+                                            {%endif%}
+                                            <img src="{{p[0]}}" alt=""
+                                                class='other_classified'>
+                                            {{p[1]}}
+                                        {%if p[1] != '-'%}
+                                        </form>
+                                        {%endif%}
+                                    </td>
+
+                                </tr>
+                            {%endif%}
+
+                        {%endfor%}
+                            <!-- <tr>
+                                <th scope="row"></th>
+                                <td> ...</td>
+                            </tr>
+                            {% if data['global_ranking']|count > 10 %}
+                            <tr>
+                                <th scope="row"></th>
+                                <td>
+                                    <form action="/profile" method="post">
+                                        <input type="hidden" name="nick" value="{{data['global_ranking'][10][1]}}">
+
+                                        <img src="{{url_for('static',filename='image/'+ data['global_ranking'][10][0])}}"
+                                            alt="" class='other_classified'>
+                                        {{data['global_ranking'][10][1]}}
+
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td> ...</td>
+                            </tr>
+                            {% endif %} -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-1 col-md-2"></div>
+    </div>

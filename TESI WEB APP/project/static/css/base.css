@@ -1,0 +1,109 @@
+body {
+    background-color: #E5E5E5 !important;
+}
+
+.logo-home{
+    width: 40%;
+    overflow: hidden;
+}
+
+ul.navbar-nav > li > a.active{
+    background-color: #B1E7FE !important;
+}
+
+.activity_profile_icon {
+    max-width: 3rem;
+    border-radius: 50%;
+}
+
+.activity_results_icon, .single_star{
+    max-width: 2rem;
+}
+
+.single_activity_profile_icon{
+    max-width: 5rem;
+    border-radius: 50%;
+}
+
+.btn-amicizia{
+    background-color: #CDECA9 !important;
+}
+
+.badges_icon{
+    max-width: 4rem;
+}
+
+/*-----------POP UP ----------*/
+/* Popup box BEGIN */
+.hover_bkgr_fricc {
+    cursor: pointer;
+    display: none;
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
+}
+
+.hover_bkgr_fricc .helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.hover_bkgr_fricc>div {
+    background-color: #fff;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    height: auto;
+    max-width: 551px;
+    min-height: 100px;
+    vertical-align: middle;
+    width: 60%;
+    position: relative;
+    border-radius: 8px;
+}
+
+.trigger_popup_fricc {
+    cursor: pointer;
+    font-size: 20px;
+    margin: 20px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.list-group, .table_wrapper{
+    max-height: 70vh;
+    overflow-y:auto;
+}
+
+.second_classified{
+    max-width: 3rem;
+    border-radius: 50%;
+}
+.third_classified{
+    max-width: 2.5rem;
+    border-radius: 50%;
+}
+.first_classified{
+    max-width: 4rem;
+    border-radius: 50%;
+}
+.other_classified, .ranking_icon{
+    max-width: 1.5rem;
+    border-radius: 50%;
+}
+
+ion-icon {
+    font-size: 22px;
+}
+
+span > a{
+    color: black;
+}
+
+.logo_first_page {
+    max-width: 13rem;
+}
+

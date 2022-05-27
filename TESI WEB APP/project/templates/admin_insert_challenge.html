@@ -1,0 +1,53 @@
+<div class='row my-5'>
+    <div class="col-1 col-md-2"></div>
+
+    <div class="card border-dark shadow col-10 col-md-8">
+        <div class="card-body text-dark py-1">
+<!--                 <form method="post" id="image-form" action="/insert_new_challenge">
+                <label for="badge">Badge:</label>
+                  <input type="file" name="image" class="file" accept="image/*" id='badge'>
+                  <div class="input-group my-3">
+                    <input type="text" class="form-control" disabled placeholder="Upload File" id="file">
+                  </div>
+                  <label for="nome">Nome sfida:</label>
+                <input type="text" class="form-control-file" id="nome">
+                <label for="data_i">Data inizio:</label>
+                <input type="date" class="form-control-file" id="data_i">
+                <label for="data_i">Data fine:</label>
+                <input type="date" class="form-control-file" id="data_f">
+                </form>
+              </div>
+              <div class="ml-2 col-sm-6">
+                <img src="https://placehold.it/80x80" id="preview" class="img-thumbnail">
+              </div> -->
+
+            <form method="post" id="image-form" action="/insert_new_challenge" enctype="multipart/form-data">
+                <div class="form-group row my-2">
+                    <label for="nome">Nome sfida:</label>
+                    <input type="text" class="form-control-file" id="nome_c" name ='nome_c'>
+                </div>
+                <div class="form-group row my-2">
+                    <label for="data_i">Data inizio:</label>
+                    <input type="date" class="form-control-file" id="data_i" name ='data_i' min="{{data['today']}}">
+                </div>
+                <div class="form-group row my-2">
+                    <label for="data_i">Data fine:</label>
+                    <input type="date" class="form-control-file" id="data_f" name ='data_f' min="{{data['today']}}">
+                </div>
+                <div class="form-group row my-2">
+                    <label for="badge">Badge:</label>
+                    <input type="file" class="form-control-file" id="badge" name='badge'>
+                </div>
+                <div>
+                    <img src="https://placehold.it/80x80" id="preview" class="img-thumbnail badges_icon col-2">
+                </div>
+                <div class="form-group row my-2">
+                    <button type="submit" class="btn btn-primary">Insert</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+
+    <div class="col-1 col-md-2"></div>
+</div>

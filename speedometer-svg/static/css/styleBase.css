@@ -1,0 +1,12 @@
+body{
+    background-color: #0B243B !important;
+}
+
+/* canvas{
+  height: 70% !important;
+  width: 50% !important;
+} */
+
+svg.card-img-top, svg.money {
+  width:45%;
+}

@@ -1,0 +1,132 @@
+/* ------ Default Style ---------- */
+/*   .gauge-container {
+    width: 150px;
+    height: 150px;
+    display: block;
+    float: left;
+    padding: 10px;
+    margin: 7px;
+    border-radius: 3px;
+    position: relative;
+  } */
+
+/*   .gauge-container {
+    width: 100%;
+  } */
+
+  .gauge-container > .gauge .dial {
+    stroke: #334455;
+    stroke-width: 2;
+    stroke-dasharray: 20 1;
+    fill: rgba(0,0,0,0);
+  }
+  .gauge-container > .gauge .value {
+    stroke:  rgb(47, 227, 255);
+    stroke-width: 4;
+    fill: rgba(0,0,0,0);
+    stroke-dasharray: 20 1;
+  }
+  .gauge-container > .gauge .value-text {
+    fill: rgb(47, 227, 255);
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 0.8em;
+  }
+  
+  .gauge-container.speed > .gauge .value, .gauge-container.rpm > .gauge .value {
+    stroke: #66B5FF;
+    stroke-width: 4;
+    stroke-dasharray: 20 1; /* permette di fare le line dash quindi ogni 20 mette lo spazio di 1 */
+  }
+
+  .gauge-container.eco > .gauge .dial, .gauge-container.ftd > .gauge .dial {
+    stroke: #334455;
+    stroke-width: 2;
+    stroke-dasharray: 20 3;
+    fill: rgba(0,0,0,0);
+  }
+
+  .gauge-container.eco > .gauge .value, .gauge-container.ftd > .gauge .value{
+    stroke: #03DAC6;
+    stroke-width: 4;
+    stroke-dasharray: 20 3; /* permette di fare le line dash quindi ogni 20 mette lo spazio di 1 */
+  }
+
+  .gauge-container.speed > .gauge .value-text, .gauge-container.rpm > .gauge .value-text{
+    fill: #66B5FF;
+  } 
+
+  .gauge-container.speed .value-text, .gauge-container.rpm .value-text {
+    color: #66B5FF;
+    font-weight: 100;
+  } 
+
+
+  #treeSVG, .fuel_svg, .water_level, #ftdSVG{
+    width: 60%;
+  }
+
+  .light_icon{
+    width: 6%;
+  }
+
+  .left_arrow, .right_arrow{
+    width: 15%;
+  }
+
+  .left_arrow g g path, .left_arrow path, .right_arrow g g path, .right_arrow path{
+    fill: green;
+  }
+
+  .light_icon{
+    fill: green;
+  }
+
+  #treeRect, #ftdRect{
+    fill :#178fd6;/* #66B5FF; */
+  }
+
+  #tree path, #ftd path{
+    fill: white;
+  }
+
+  #treePath, #ftdPath{
+    stroke-width: 3;
+    stroke: #178fd6;/* #03DAC6;  */
+    fill: transparent;
+  }
+
+ /*  #ftdRect{
+    fill : #66B5FF;
+  }
+
+  #ftd path{
+    fill: white;
+  }
+
+  #ftdPath{
+    stroke-width: 6;
+    stroke: #03DAC6;
+    fill: transparent;
+  } */
+
+  .progress {
+    background-color: #334455 !important;
+  }
+
+  .progress-bar {
+    background-color:#66B5FF !important;
+    color: black !important;
+  }
+
+  .fuel_svg>g> path , .water_level>path{
+    fill: white;
+  }
+
+  div.displaySection{
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.6), 0 6px 20px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  div.containerDisplaySection svg.gauge{
+    width: 80%;
+  }

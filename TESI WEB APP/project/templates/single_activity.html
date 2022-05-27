@@ -1,0 +1,183 @@
+<div class='row my-5'>
+    <div class="col-1 col-md-2"></div>
+
+    <div class="card border-dark col-10 col-md-8 shadow p-0">
+        <div class="card-body text-dark py-1">
+            <!-- header -->
+            <div class="row border-bottom border-dark  pb-2">
+                <div class="col-7 my-auto fw-bold">
+                    <form action="/profile" method="POST">
+                        <input type="hidden" name="nick" value="{{data['activity']['nick']}}">
+                        {{data['activity']['nick']}}
+                    </form>
+                    <span class="idActivity" hidden>{{data['activity']['id']}}</span>
+                </div>
+                <div class="col-5 data my-auto text-end">
+                    {{data['activity']['data']}}
+                </div>
+            </div>
+
+            <div class="row border-bottom border-dark px-0 py-2">
+                <div class="col-4 my-auto">
+                    <img src="{{data['activity']['img']}}" alt=""
+                        class='single_activity_profile_icon'>
+                </div>
+
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-6">
+                            FTD
+                        </div>
+                        <div class="col-6 my-auto text-end">
+                            {{data['activity']['ftd_score']}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            ECO
+                        </div>
+                        <div class="col-6 my-auto text-end">
+                            {{data['activity']['eco_score']}}
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            Like
+                        </div>
+                        <div class="col-6 my-auto text-end">
+                            <button type="button" class="btn btn-light {% if data['activity']['has_like'] %}disabled{%endif%} set_like">
+                                {%if data['activity']['has_like']%}
+                                    <ion-icon name="heart" size="small"></ion-icon>
+                                {%else%}
+                                    <ion-icon name="heart-outline" size="small"></ion-icon>
+                                {%endif%}
+                            </button>
+                            <span class='like_num'>{{data['activity']['like']}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fitness to drive details -->
+            <div class="row border-bottom border-dark  p-2">
+
+                <div class="col-7 my-auto fw-bold">
+                    Fitness to Drive
+                </div>
+                <div class="col-5 data my-auto text-end">
+                    {%for res in data['activity']['ftd_res'] %}
+                    <img src="{{url_for('static',filename='image/results/'+ res)}}" alt=""
+                        class='activity_results_icon'>
+                    {% endfor %}
+                </div>
+
+
+                <div class="col-12 col-md-6 mx-auto my-2">
+                    <table class="table table-bordered border-dark elementOfDistractionTable">
+                        <thead class="text-center">
+                            <tr>
+                                <th scope="col" id="disctractionElement">Element</th>
+                                <th scope="col" id="distractionValue">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-12 col-md-6 mx-auto my-2">
+                    <canvas id="ElementOfDistractionRadar"></canvas>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <table class="table ftdTrendStatistic">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Max</th>
+                                <td class="ftdTrendMax"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Min</th>
+                                <td class="ftdTrendMin"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Mean</th>
+                                <td class="ftdTrendMean"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-12 col-md-6 mx-auto my-2">
+                    <canvas id="ftdTrendGraph"></canvas>
+                </div>
+            
+            </div>
+
+            <!-- eco details -->
+            <div class="row p-2">
+
+                <div class="col-7 my-auto fw-bold">
+                    Eco
+                </div>
+                <div class="col-5 data my-auto text-end">
+                    {%for res in data['activity']['eco_res'] %}
+                    <img src="{{url_for('static',filename='image/results/'+ res)}}" alt=""
+                        class='activity_results_icon'>
+                    {% endfor %}
+                </div>
+                <div class="col-7 my-auto fw-bold pt-2">
+                    Activity savings
+                </div>
+                <div class="col-5 data my-auto text-end pt-2">
+                    {{data['activity']['eco_risparmio']}}
+                    <img src="{{url_for('static',filename='image/results/money.svg')}}" alt=""
+                        class='activity_results_icon'>
+
+                </div>
+                <div class="col-12 col-md-3 mx-auto my-2">
+                    <table class="table ecoDriveStatistic ">
+                      <thead>
+                        <tr>
+                          <th scope="col"></th>
+                          <th scope="col">Value</th>
+            
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">Max</th>
+                          <td class="ecoTrendMax"></td>
+                          
+                        </tr>
+                        <tr>
+                          <th scope="row">Min</th>
+                          <td class="ecoTrendMin"></td>
+            
+                        </tr>
+                        <tr>
+                          <th scope="row">Mean</th>
+                          <td class="ecoTrendMean"></td>
+            
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-md-3"></div>
+                  <div class="col-12 col-md-6 mx-auto my-2">
+                    <canvas id="ecoTrendGraph"></canvas>
+                  </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-1 col-md-2"></div>
+</div>
