@@ -58,6 +58,6 @@ $().ready(()=>{
                     console.log("error")
             }
         });
-    }, 1000);  //change to 1000 == 1 sec -> 50 millisec == 20hz
+    }, 100);  //change to 1000 == 1 sec -> 50 millisec == 20hz
 
 });

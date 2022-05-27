@@ -141,7 +141,7 @@ $(document).ready(() => {
                 console.log("error")
         }
     });
-}, 50);
+}, 100);
 
   $(".msgAlarm").hide();
   $(".msgSaving").hide();
