@@ -1,6 +1,6 @@
 from types import DynamicClassAttribute
 from flask import Flask, jsonify, render_template, request, session, url_for, redirect
-from database.database_manager import Database
+#from database.database_manager import Database -> install mysql and mysql client
 from authlib.integrations.flask_client import OAuth
 
 import paho.mqtt.client as mqtt
@@ -66,7 +66,8 @@ s = 0 #speed value
 Ei = 0
 DCi = 0
 DVi = 0
-timestamp_relab=0;
+timestamp_relab=0
+arousal=0
 
 flagE = False
 flagD = False
@@ -93,6 +94,7 @@ neutral_buffer = [0,0,0,0]
 disgust_buffer = [0,0,0,0]
 surprise_buffer = [0,0,0,0]
 speed_buffer = [0,0,0,0]
+arousal_buffer = [0, 0, 0, 0]  # 1 arousal max, 0 arousal min
 
 
 user = 'person0'
@@ -112,8 +114,8 @@ def on_connect(client, userdata, flags, rc):
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     global FTD, IDC, IDV, weight, decimals, threshold_v, threshold_i_v, threshold_i_c, DCi, DVi, s, Ei, flagD, flagE, flagV
-    global anger, happiness, fear, sadness, neutral, disgust, surprise, cd, vd 
-    global anger_buffer, happiness_buffer, fear_buffer, sadness_buffer, neutral_buffer, disgust_buffer, surprise_buffer, speed_buffer, timestamp_relab
+    global anger, happiness, fear, sadness, neutral, disgust, surprise, cd, vd, arousal 
+    global anger_buffer, happiness_buffer, fear_buffer, sadness_buffer, neutral_buffer, disgust_buffer, surprise_buffer, speed_buffer, timestamp_relab, arousal_buffer
     global user
     #print("topic: "+msg.topic)
 
@@ -200,6 +202,22 @@ def on_message(client, userdata, msg):
         except Exception as exception:
                 print(exception)
         #emotions_total= Ei
+
+    elif msg.topic == 'NP_UNIPR_AROUSAL':
+
+        try:
+            data = json.loads(str(msg.payload.decode("utf-8")))
+            print(data)
+            if len(str(msg.payload.decode('utf-8'))) == 0:
+                
+                print('NO arousal value')
+            elif "arousal" in data:
+                arousal_buffer.pop(0)
+                arousal_buffer.append(data['arousal'])
+                arousal = np.mean(arousal_buffer)
+        except Exception as exception:
+                print(exception)
+
     elif msg.topic == 'NP_UNIBO_FTD':
         try:
             if len(str(msg.payload.decode('utf-8'))) == 0:
@@ -221,9 +239,9 @@ def on_message(client, userdata, msg):
 
         emotions = pd.Series([anger, happiness, fear, sadness, neutral, disgust, surprise])
         
-        Ei =  round((emotions * weights_emozioni).sum() / weights_emozioni.sum(), decimals)
+        Ei =  round(((emotions * weights_emozioni).sum() / weights_emozioni.sum()) * arousal, decimals)
 
-        if (cd):
+        if (vd):
             IDV +=1
         else:
             IDV = 0 
@@ -294,8 +312,8 @@ def hello_world():
 @app.route('/', methods=['GET'])
 def home():
     global FTD, IDC, IDV, DCi, DVi, s, Ei, flagD, flagE, flagV
-    global anger, happiness, fear, sadness, neutral, disgust, surprise, cd, vd 
-    global anger_buffer, happiness_buffer, fear_buffer, sadness_buffer, neutral_buffer, disgust_buffer, surprise_buffer, speed_buffer, timestamp_relab
+    global anger, happiness, fear, sadness, neutral, disgust, surprise, cd, vd, arousal 
+    global arousal_buffer, anger_buffer, happiness_buffer, fear_buffer, sadness_buffer, neutral_buffer, disgust_buffer, surprise_buffer, speed_buffer, timestamp_relab
 
     FTD = 1
     IDC = 0
@@ -305,7 +323,8 @@ def home():
     Ei = 0
     DCi = 0
     DVi = 0
-    timestamp_relab=0;
+    timestamp_relab=0
+    arousal=0
 
     flagE = False
     flagD = False
@@ -319,6 +338,7 @@ def home():
     disgust_buffer = [0,0,0,0]
     surprise_buffer = [0,0,0,0]
     speed_buffer = [0,0,0,0]
+    arousal_buffer = [0, 0, 0, 0]  # 1 arousal max, 0 arousal min
 
     for key in list(session.keys()):
         session.pop(key)
@@ -349,6 +369,16 @@ def publish_data():
     client.loop_start()
     #client.on_subscribe = on_subscribe
     #client.on_message = on_message
+
+    anger = 0
+    disgust = 0
+    fear = 0
+    joy = 0
+    neutral = 0
+    sadness = 0
+    surprise = 0
+    arousal = 0
+
     for k in range(4):
         speedVal = random.randint(0, 140)
         anger = round(random.random(),decimals) # num casuale tra 0 e 1
@@ -365,6 +395,15 @@ def publish_data():
 
         s = speed
 
+        arousal_topic = [
+            json.dumps({"arousal": 0}),
+            json.dumps({"arousal": round(random.random(), decimals)}),
+            json.dumps({"arousal": 1})
+        ]
+        arousalSend = random.choice(arousal_topic)
+        arousal = json.loads(arousalSend)["arousal"]
+
+        client.publish('NP_UNIPR_AROUSAL',arousalSend)
         client.publish('Emotions', emotion)
         client.publish('NP_RELAB_VD', speed)
 
@@ -383,12 +422,23 @@ def publish_data():
     client.publish('AITEK_EVENTS', DV_topic)
     client.loop_stop()
     
-    return {'vehicleSpeed':speedVal}
+    return {'vehicleSpeed':speedVal,
+            'cognitiveDistraction': DC,
+            'visualDistraction': str(bool(DV)),
+            'angry': str(anger),
+            'disgust': str(disgust),
+            'fear' : str(fear),
+            'joy' : str(joy),
+            'neutral' : str(neutral),
+            'sadness' : str(sadness),
+            'surprise' : str(surprise),
+            'arousal': str(arousal)
+    }
 
 @app.route('/getFTD')
 def getFTD():
     global FTD
-    return {'ftd':FTD}
+    return {'ftd':str(round(FTD, 4))}
 
 
 @app.route('/infotainment')
@@ -398,17 +448,17 @@ def infotainmet():
     return render_template("CarInfotainment.html")
 
 
-@app.route('/get_elementOfDistraction_data')
+''' @app.route('/get_elementOfDistraction_data')
 def get_elementOfDistraction_data():
     data = db.get_elementOfDistraction_data()
-    return data
+    return data '''
 
-@app.route('/get_last_10_FTD')
+''' @app.route('/get_last_10_FTD')
 def get_last_10_FTD():
     data = db.get_last_10_FTD()
-    return data
+    return data '''
 
 
 if __name__ == "__main__":
-    db = Database()
+    #db = Database()
     app.run(use_reloader=False, port=8000, debug=True)

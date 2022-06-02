@@ -39,6 +39,21 @@ function updateFuel(fuel_level){
     $(".fuel").text(level +'%');
 }
 
+function updateValues(data){
+  $(".cognitiveDistractionVal").text(data.cognitiveDistraction)
+  $(".visualDistractionVal").text(data.visualDistraction)
+
+  $(".neutralVal").text(data.neutral)
+  $(".angryVal").text(data.angry)
+  $(".joyVal").text(data.joy)
+  $(".fearVal").text(data.fear)
+  $(".sadnessVal").text(data.sadness)
+  $(".disgustVal").text(data.disgust)
+  $(".surpriseVal").text(data.surprise)
+
+  $(".arousalVal").text(data.arousal)
+}
+
 
 //si occupa di chiamare ogni secondo lo script che fa la publish dei messaggi contenenti i dati 
 $().ready(()=>{
@@ -53,11 +68,26 @@ $().ready(()=>{
                 updateSpeedGauge(dataJSON.vehicleSpeed)
                 //updateRPMGauge(dataJSON.engineSpeed)
                 //updateFuel(dataJSON.fuelLevel)
+                updateValues(dataJSON)
             },
             error: function () {
                     console.log("error")
             }
         });
-    }, 100);  //change to 1000 == 1 sec -> 50 millisec == 20hz
+    }, 1000);  //change to 1000 == 1 sec -> 50 millisec == 20hz
+
+    setInterval(function(){
+      $.ajax({
+          url: '/getFTD',
+          type: 'GET',
+          dataType: 'json',
+          success: function(dataJSON) {
+            $(".FTDVal").text(dataJSON.ftd)
+          },
+          error: function () {
+                  console.log("error")
+          }
+      });
+  }, 1000);  //change to 1000 == 1 sec -> 50 millisec == 20hz
 
 });
