@@ -284,6 +284,12 @@ client.on_connect = on_connect  # Define callback function for successful connec
 client.on_message = on_message  # Define callback function for receipt of a message
 #client.username_pw_set(mqtt_user, mqtt_password)
 client.connect("broker.hivemq.com", port=1883)
+
+client2 = mqtt.Client(client_id="foo", clean_session=True)
+client2.on_connect = on_connect  # Define callback function for successful connection
+client2.on_message = on_message  # Define callback function for receipt of a message
+#client.username_pw_set(mqtt_user, mqtt_password)
+client2.connect("broker.mqttdashboard.com", port=8000)
 #client.loop_start()
 
 
@@ -405,6 +411,9 @@ def publish_data():
 
         client.publish('NP_UNIPR_AROUSAL',arousalSend)
         client.publish('Emotions', emotion)
+
+        client2.publish('Emotions', emotion)
+        
         client.publish('NP_RELAB_VD', speed)
 
     DC = random.randint(0, 1)
