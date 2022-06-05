@@ -253,6 +253,7 @@ def on_message(client, userdata, msg):
             'ftd' : max(0, 1 - (DCi + DVi + Ei))
             }}
         client.publish("NP_UNIBO_FTD", json.dumps(ftd))
+        client2.publish("NP_UNIBO_FTD", json.dumps(ftd))
 
         msg = {
             'FTD': max(0, 1 - (DCi + DVi + Ei)),
@@ -287,7 +288,6 @@ client.connect("broker.hivemq.com", port=1883)
 
 client2 = mqtt.Client(client_id="foo", clean_session=True)
 client2.on_connect = on_connect  # Define callback function for successful connection
-client2.on_message = on_message  # Define callback function for receipt of a message
 #client.username_pw_set(mqtt_user, mqtt_password)
 client2.connect("broker.mqttdashboard.com", port=8000)
 #client.loop_start()
@@ -410,11 +410,13 @@ def publish_data():
         arousal = json.loads(arousalSend)["arousal"]
 
         client.publish('NP_UNIPR_AROUSAL',arousalSend)
-        client.publish('Emotions', emotion)
+        client2.publish('NP_UNIPR_AROUSAL',arousalSend)
 
+        client.publish('Emotions', emotion)
         client2.publish('Emotions', emotion)
         
         client.publish('NP_RELAB_VD', speed)
+        client2.publish('NP_RELAB_VD', speed)
 
     DC = random.randint(0, 1)
     eyesOffRoad = random.randint(0, 1)
@@ -422,6 +424,7 @@ def publish_data():
     DC_topic = ['{"time": 123456, "eyesOffRoad": ' +str(eyesOffRoad)+',"cognitive_distraction":'+str(DC)+', "eyesOffRoad_confidence": '+str(random.choice(confidence_value))+',  "cognitive_distraction_confidence": '+str(random.choice(confidence_value))+', "eyesOffRoad_pred_1s": 0.0, "cognitive_distraction_pred_1s": 0.0 }']
     D = random.choice(DC_topic)
     client.publish('NP_UNITO_DCDC', D)
+    client2.publish('NP_UNITO_DCDC', D)
     
     DV = random.randint(0, 1)
     if DV != start:
@@ -429,6 +432,7 @@ def publish_data():
     DV_topic = '{"timestamp": "2022-04-11 16:52:26.123", "event": "reverse", "start": "'+ str(bool(DV)) + '"}'
 
     client.publish('AITEK_EVENTS', DV_topic)
+    client2.publish('AITEK_EVENTS', DV_topic)
     client.loop_stop()
     
     return {'vehicleSpeed':speedVal,
@@ -455,6 +459,10 @@ def infotainmet():
     # app.route('/infotainment')
     client.disconnect()
     return render_template("CarInfotainment.html")
+
+@app.route('/emitter')
+def emitter():
+    return render_template("emitter.html")
 
 
 ''' @app.route('/get_elementOfDistraction_data')

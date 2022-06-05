@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styleCockpit.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styleBase.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <title>Emitter</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-bordered text-white">
+                <thead>
+                    <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Fitness-to-drive</th>
+                        <td class="FTDVal">1</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Cognitive Distraction</th>
+                        <td class="cognitiveDistractionVal">0</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">visual Distraction</th>
+                        <td class="visualDistractionVal">0</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Emotions</th>
+                        <td>
+                            <table class="table text-white">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">angry</th>
+                                        <td class="angryVal">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">joy</th>
+                                        <td class="joyVal">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">fear</th>
+                                        <td class="fearVal">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">disgust</th>
+                                        <td class="disgustVal">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">sadness</th>
+                                        <td class="sadnessVal">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">surprise</th>
+                                        <td class="surpriseVal">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">neutral</th>
+                                        <td class="neutralVal">0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Arousal</th>
+                        <td class="arousalVal">0</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Speed</th>
+                        <td class="speedVal">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-4 col-md-4">
+                <canvas id="emotionLinechart"></canvas>
+            </div>
+            <div class="col-4 col-md-4">
+                <canvas id="speedLineChart"></canvas>
+            </div>
+            <div class="col-4 col-md-4">
+                <canvas id="cognitiveDistractionChart"></canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-md-4">
+                <canvas id="visualDistractionChart"></canvas>
+            </div>
+            <div class="col-4 col-md-4">
+                <canvas id="arousalChart"></canvas>
+            </div>
+            <div class="col-4 col-md-4">
+                <canvas id="ftdChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"></script>
+    <script src="{{url_for('static',filename='js/updateEmitter.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+
+
+</body>
+
+</html>
