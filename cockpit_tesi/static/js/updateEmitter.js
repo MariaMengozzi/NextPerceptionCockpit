@@ -20,7 +20,7 @@ let ftdChart = new Chart(document.getElementById("ftdChart").getContext('2d'), {
             label: 'FTD',
             data: ftd_buffer,
             borderColor: 'rgb(172, 189, 186)',
-            tension: 0.1,
+            tension: 0.3,
         }
         ]
     },
@@ -57,43 +57,43 @@ let emotionChart = new Chart(document.getElementById("emotionLinechart").getCont
             label: 'anger',
             data: anger_buffer,
             borderColor: 'rgb(172, 189, 186)',
-            tension: 0.1,
+            tension: 0.3,
         },
         {
             label: 'happiness',
             data: happiness_buffer,
             borderColor: 'rgb(232, 180, 188)',
-            tension: 0.1,
+            tension: 0.3,
         },
         {
             label: 'disgust',
             data: disgust_buffer,
             borderColor: 'rgb(113, 231, 188)',
-            tension: 0.1,
+            tension: 0.3,
         },
         {
             label: 'fear',
             data: fear_buffer,
             borderColor: 'rgb(194, 29, 188)',
-            tension: 0.1,
+            tension: 0.3,
         },
         {
             label: 'neutral',
             data: neutral_buffer,
             borderColor: 'rgb(176, 202, 135)',
-            tension: 0.1,
+            tension: 0.3,
         },
         {
             label: 'surprise',
             data: surprise_buffer,
             borderColor: 'rgb(168, 130, 221)',
-            tension: 0.1,
+            tension: 0.3,
         },
         {
             label: 'sadness',
             data: sadness_buffer,
             borderColor: 'rgb(238, 252, 87)',
-            tension: 0.1,
+            tension: 0.3,
         },
         ]
     },
@@ -131,7 +131,7 @@ let speedChart = new Chart(document.getElementById("speedLineChart").getContext(
             label: 'speed',
             data: speed_buffer,
             borderColor: 'rgb(172, 189, 186)',
-            tension: 0.1,
+            tension: 0.3,
         }
         ]
     },
@@ -168,7 +168,7 @@ let arousalChart = new Chart(document.getElementById("arousalChart").getContext(
             label: 'arousal',
             data: arousal_buffer,
             borderColor: 'rgb(172, 189, 186)',
-            tension: 0.1,
+            tension: 0.3,
         }
         ]
     },
@@ -278,43 +278,43 @@ function emotionLineChart() {
         label: 'anger',
         data: anger_buffer,
         borderColor: 'rgb(172, 189, 186)',
-        tension: 0.1,
+        tension: 0.3,
     },
     {
         label: 'happiness',
         data: happiness_buffer,
         borderColor: 'rgb(232, 180, 188)',
-        tension: 0.1,
+        tension: 0.3,
     },
     {
         label: 'disgust',
         data: disgust_buffer,
         borderColor: 'rgb(113, 231, 188)',
-        tension: 0.1,
+        tension: 0.3,
     },
     {
         label: 'fear',
         data: fear_buffer,
         borderColor: 'rgb(194, 29, 188)',
-        tension: 0.1,
+        tension: 0.3,
     },
     {
         label: 'neutral',
         data: neutral_buffer,
         borderColor: 'rgb(176, 202, 135)',
-        tension: 0.1,
+        tension: 0.3,
     },
     {
         label: 'surprise',
         data: surprise_buffer,
         borderColor: 'rgb(168, 130, 221)',
-        tension: 0.1,
+        tension: 0.3,
     },
     {
         label: 'sadness',
         data: sadness_buffer,
         borderColor: 'rgb(238, 252, 87)',
-        tension: 0.1,
+        tension: 0.3,
     }
     ]
     emotionChart.update()
@@ -325,7 +325,7 @@ function speedLineChart() {
         label: 'speed',
         data: speed_buffer,
         borderColor: 'rgb(172, 189, 186)',
-        tension: 0.1,
+        tension: 0.3,
     },
     ]
     speedChart.update()
@@ -336,7 +336,7 @@ function ftdLineChart() {
         label: 'FTD',
         data: ftd_buffer,
         borderColor: 'rgb(172, 189, 186)',
-        tension: 0.1,
+        tension: 0.3,
     },
     ]
     ftdChart.update()
@@ -347,7 +347,7 @@ function arousalLineChart() {
         label: 'arousal',
         data: arousal_buffer,
         borderColor: 'rgb(172, 189, 186)',
-        tension: 0.1,
+        tension: 0.3,
     },
     ]
     arousalChart.update()
