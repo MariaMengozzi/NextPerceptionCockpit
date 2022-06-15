@@ -19,7 +19,7 @@ let ftdChart = new Chart(document.getElementById("ftdChart").getContext('2d'), {
         datasets: [{
             label: 'FTD',
             data: ftd_buffer,
-            borderColor: 'rgb(172, 189, 186)',
+            borderColor: 'rgb(189, 191, 9)',
             tension: 0.3,
         }
         ]
@@ -45,6 +45,13 @@ let ftdChart = new Chart(document.getElementById("ftdChart").getContext('2d'), {
                     color: '#1c5b97'
                 }
             },
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'white'
+                }
+            }
         }
     }
 });
@@ -119,6 +126,14 @@ let emotionChart = new Chart(document.getElementById("emotionLinechart").getCont
                     color: '#1c5b97'
                 }
             },
+        },
+        //options.plugins.legend.labels
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'white'
+                }
+            }
         }
     }
 });
@@ -130,7 +145,7 @@ let speedChart = new Chart(document.getElementById("speedLineChart").getContext(
         datasets: [{
             label: 'speed',
             data: speed_buffer,
-            borderColor: 'rgb(172, 189, 186)',
+            borderColor: 'rgb(249, 86, 79)',
             tension: 0.3,
         }
         ]
@@ -156,6 +171,13 @@ let speedChart = new Chart(document.getElementById("speedLineChart").getContext(
                     color: '#1c5b97'
                 }
             },
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'white'
+                }
+            }
         }
     }
 });
@@ -167,7 +189,7 @@ let arousalChart = new Chart(document.getElementById("arousalChart").getContext(
         datasets: [{
             label: 'arousal',
             data: arousal_buffer,
-            borderColor: 'rgb(172, 189, 186)',
+            borderColor: 'rgb(34, 146, 164)',
             tension: 0.3,
         }
         ]
@@ -193,6 +215,13 @@ let arousalChart = new Chart(document.getElementById("arousalChart").getContext(
                     color: '#1c5b97'
                 }
             },
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'white'
+                }
+            }
         }
     }
 });
@@ -204,8 +233,8 @@ let cdChart = new Chart(document.getElementById("cognitiveDistractionChart").get
         datasets: [{
             label: 'cognitiveDistraction',
             data: cognitive_buffer,
-            borderColor: 'rgba(153, 102, 255)',
-            backgroundColor: 'rgba(153, 102, 255, 0.2)'
+            backgroundColor: 'rgba(170, 246, 131, 0.2)',
+            borderColor: 'rgb(170, 246, 131)'
         }
         ]
     },
@@ -231,6 +260,13 @@ let cdChart = new Chart(document.getElementById("cognitiveDistractionChart").get
                 },
                 beginAtZero: true
             },
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'white'
+                }
+            }
         }
     }
 });
@@ -242,8 +278,8 @@ let vdChart = new Chart(document.getElementById("visualDistractionChart").getCon
         datasets: [{
             label: 'visualDistraction',
             data: visual_buffer,
-            borderColor: 'rgba(153, 102, 255)',
-            backgroundColor: 'rgba(153, 102, 255, 0.2)'
+            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+            borderColor: 'rgb(153, 102, 255)',
         }
         ]
     },
@@ -269,6 +305,13 @@ let vdChart = new Chart(document.getElementById("visualDistractionChart").getCon
                 },
                 beginAtZero: true
             },
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'white'
+                }
+            }
         }
     }
 });
@@ -324,7 +367,7 @@ function speedLineChart() {
     speedChart.data.datasets = [{
         label: 'speed',
         data: speed_buffer,
-        borderColor: 'rgb(172, 189, 186)',
+        borderColor: 'rgb(249, 86, 79)',
         tension: 0.3,
     },
     ]
@@ -335,7 +378,7 @@ function ftdLineChart() {
     ftdChart.data.datasets = [{
         label: 'FTD',
         data: ftd_buffer,
-        borderColor: 'rgb(172, 189, 186)',
+        borderColor: 'rgb(189, 191, 9)',
         tension: 0.3,
     },
     ]
@@ -346,7 +389,7 @@ function arousalLineChart() {
     arousalChart.data.datasets = [{
         label: 'arousal',
         data: arousal_buffer,
-        borderColor: 'rgb(172, 189, 186)',
+        borderColor: 'rgb(34, 146, 164)',
         tension: 0.3,
     },
     ]
@@ -357,8 +400,8 @@ function cdBarChart() {
     cdChart.data.datasets = [{
         label: 'cognitiveDistraction',
         data: cognitive_buffer,
-        borderColor: 'rgba(153, 102, 255)',
-        backgroundColor: 'rgba(153, 102, 255, 0.2)'
+        backgroundColor: 'rgba(170, 246, 131, 0.2)',
+        borderColor: 'rgb(170, 246, 131)'
     }
     ]
     cdChart.update()
@@ -368,8 +411,8 @@ function vdBarChart() {
     vdChart.data.datasets = [{
         label: 'visualDistraction',
         data: visual_buffer,
-        borderColor: 'rgba(153, 102, 255)',
-        backgroundColor: 'rgba(153, 102, 255, 0.2)'
+        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+        borderColor: 'rgb(153, 102, 255)',
     }
     ]
     vdChart.update()
