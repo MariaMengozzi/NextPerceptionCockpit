@@ -454,11 +454,11 @@ def getFTD():
     return {'ftd':str(round(FTD, 4))}
 
 
-@app.route('/infotainment')
+''' @app.route('/infotainment')
 def infotainmet():
     # app.route('/infotainment')
     client.disconnect()
-    return render_template("CarInfotainment.html")
+    return render_template("CarInfotainment.html") '''
 
 @app.route('/emitter')
 def emitter():
