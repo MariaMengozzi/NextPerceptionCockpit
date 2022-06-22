@@ -423,7 +423,7 @@ function onConnect() {
     // Once a connection has been made, make a subscription and send a message.
     console.log("onConnect");
     client.subscribe("Emotions");
-    client.subscribe("NP_RELAB_VD");
+    client.subscribe("RL_VehicleDynamics");
     client.subscribe("NP_UNITO_DCDC");
     client.subscribe("AITEK_EVENTS");
     client.subscribe("NP_UNIBO_FTD");
@@ -441,7 +441,15 @@ function onConnectionLost(responseObject) {
 function onMessageArrived(message) {
 
     if (message.destinationName === "Emotions") {
-        msg = JSON.parse(message.payloadString)
+        json = ''
+        if (message.payloadString.length === 0 || message.payloadString === "{}"){
+            json = '{"person0": {"predominant" : "0","neutral":"0","happiness": "0","surprise":"0","sadness": "0","anger": "0","disgust": "0","fear": "0","engagement": "0","valence": "0"}}'
+        } else {
+            json = message.payloadString
+        }
+
+        msg = JSON.parse(json)
+
         anger_buffer.shift()
         anger_buffer.push(parseFloat(msg.person0.anger))
 
@@ -471,14 +479,20 @@ function onMessageArrived(message) {
         $(".disgustVal").text(msg.person0.disgust)
         $(".surpriseVal").text(msg.person0.surprise)
         emotionLineChart()
-    } else if (message.destinationName === "NP_RELAB_VD") {
+    } else if (message.destinationName === "RL_VehicleDynamics") {
         msg = JSON.parse(message.payloadString)
         speed_buffer.shift()
         speed_buffer.push(parseFloat(msg.VehicleDynamics.speed.x))
         $(".speedVal").text(msg.VehicleDynamics.speed.x)
         speedLineChart()
     } else if (message.destinationName === "NP_UNITO_DCDC") {
-        msg = JSON.parse(message.payloadString)
+        json = ""
+        if (message.payloadString.length === 0){
+            json = '{"cognitive_distraction" : 0}'
+        } else {
+            json = message.payloadString
+        }
+        msg = JSON.parse(json)
         cognitive_buffer.shift()
         cognitive_buffer.push(parseInt(msg.cognitive_distraction))
         $(".cognitiveDistractionVal").text(msg.cognitive_distraction)
