@@ -442,7 +442,7 @@ function onMessageArrived(message) {
 
     if (message.destinationName === "Emotions") {
         json = ''
-        if (message.payloadString.length === 0 || message.payloadString === "{}"){
+        if (message.payloadString.length === 0 || message.payloadString === "{ }"){
             json = '{"person0": {"predominant" : "0","neutral":"0","happiness": "0","surprise":"0","sadness": "0","anger": "0","disgust": "0","fear": "0","engagement": "0","valence": "0"}}'
         } else {
             json = message.payloadString
