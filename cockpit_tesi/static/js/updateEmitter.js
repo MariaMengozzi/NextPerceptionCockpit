@@ -508,7 +508,7 @@ function onMessageArrived(message) {
         ftdLineChart()
     } else if (message.destinationName === "AITEK_EVENTS") {
         msg = JSON.parse(message.payloadString)
-        visual = msg.start === 'True' ? 1 : 0
+        visual = msg.start ? 1 : 0
         visual_buffer.shift()
         visual_buffer.push(visual)
         $(".visualDistractionVal").text(msg.start)

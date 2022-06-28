@@ -165,7 +165,7 @@ def on_message(client, userdata, msg):
                 raise EmptyMessageException(topic='AITEK_EVENTS')
             else:
                 D = json.loads(str(msg.payload.decode("utf-8")))
-                vd = 1 if D['start'] == 'True' else 0
+                vd = 1 if D['start'] else 0
 
         except Exception as exception:
             vd = 0
@@ -429,7 +429,7 @@ def publish_data():
     DV = random.randint(0, 1)
     if DV != start:
         start = DV
-    DV_topic = '{"timestamp": "2022-04-11 16:52:26.123", "event": "reverse", "start": "'+ str(bool(DV)) + '"}'
+    DV_topic = '{"timestamp": "2022-04-11 16:52:26.123", "event": "reverse", "start": '+ str(bool(DV)).lower() + '}'
 
     client.publish('AITEK_EVENTS', DV_topic)
     client2.publish('AITEK_EVENTS', DV_topic)
